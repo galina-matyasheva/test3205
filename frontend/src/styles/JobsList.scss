@@ -1,0 +1,194 @@
+@use 'sass:color';
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.jobs-list {
+  @include card;
+
+  &__title {
+    font-size: 20px;
+    margin-bottom: $spacing-md;
+    color: $text-primary;
+  }
+
+  &__empty {
+    text-align: center;
+    padding: $spacing-xl;
+    color: $text-secondary;
+    font-style: italic;
+  }
+
+  &__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    max-height: 500px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $bg-light;
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: color.adjust($bg-light, $lightness: -20%);
+      border-radius: 3px;
+    }
+  }
+
+  &__loading {
+    @include flex-center;
+    padding: $spacing-xl;
+    color: $text-secondary;
+  }
+}
+
+.job-item {
+  position: relative;
+  padding: $spacing-md;
+  border: 1px solid color.adjust($bg-light, $lightness: -5%);
+  border-radius: $border-radius;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    background-color: $bg-hover;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &--active {
+    border-color: $primary-color;
+    background-color: rgba($primary-color, 0.05);
+    box-shadow: 0 0 0 1px $primary-color;
+  }
+
+  &__header {
+    @include flex-between;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__id {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: $text-secondary;
+    background-color: $bg-light;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: 3px;
+  }
+
+  &__date {
+    font-size: 12px;
+    color: $text-secondary;
+  }
+
+  &__status {
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &--pending {
+      color: $status-pending;
+    }
+    &--in_progress {
+      color: $status-in-progress;
+    }
+    &--success {
+      color: $status-success;
+    }
+    &--cancelled {
+      color: $status-cancelled;
+    }
+    &--failed {
+      color: $status-error;
+    }
+  }
+
+  &__progress {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-top: $spacing-sm;
+    font-size: 13px;
+    color: $text-secondary;
+  }
+
+  &__success-count {
+    font-size: 12px;
+    color: $status-success;
+    font-weight: 600;
+  }
+
+  &__error-count {
+    font-size: 12px;
+    color: $error-color;
+    font-weight: 600;
+  }
+
+  &__cancelled-count {
+    font-size: 12px;
+    color: $status-cancelled;
+    font-weight: 600;
+  }
+
+  &__progress-bar {
+    flex: 1;
+    height: 4px;
+    background-color: $bg-light;
+    border-radius: 2px;
+    overflow: hidden;
+    display: flex;
+
+    &-segment {
+      height: 100%;
+      transition: width 0.3s ease;
+
+      &--success {
+        background: linear-gradient(90deg, $primary-color, $success-color);
+      }
+
+      &--error {
+        background-color: $error-color;
+      }
+
+      &--cancelled {
+        background-color: $status-cancelled;
+      }
+    }
+  }
+
+  &__delete-btn {
+    position: absolute;
+    top: $spacing-xs;
+    right: $spacing-xs;
+    padding: 2px 6px;
+    border: none;
+    border-radius: 3px;
+    background: transparent;
+    color: $text-secondary;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0;
+    transition:
+      opacity 0.2s,
+      color 0.2s,
+      background 0.2s;
+
+    .job-item:hover & {
+      opacity: 1;
+    }
+
+    &:hover {
+      color: $error-color;
+      background: rgba($error-color, 0.1);
+    }
+  }
+}

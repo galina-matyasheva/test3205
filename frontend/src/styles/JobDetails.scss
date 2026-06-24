@@ -1,0 +1,248 @@
+@use 'sass:color';
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.job-details {
+  &__title {
+    font-size: 24px;
+    margin-bottom: $spacing-lg;
+    padding-bottom: $spacing-md;
+    border-bottom: 2px solid $bg-light;
+  }
+
+  &__empty {
+    @include flex-center;
+    flex-direction: column;
+    padding: $spacing-xl * 2;
+    color: $text-secondary;
+  }
+
+  &__loading {
+    @include flex-center;
+    padding: $spacing-xl * 2;
+    color: $text-secondary;
+  }
+
+  &__error {
+    background-color: rgba($error-color, 0.1);
+    border: 1px solid $error-color;
+    color: $error-color;
+    padding: $spacing-md;
+    border-radius: $border-radius;
+    margin-bottom: $spacing-md;
+  }
+}
+
+.job-info {
+  background: linear-gradient(135deg, $bg-light, color.adjust($bg-light, $lightness: -2%));
+  padding: $spacing-lg;
+  border-radius: $border-radius-lg;
+  margin-bottom: $spacing-lg;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+  }
+
+  &__item {
+    min-width: 160px;
+    flex: 0 1 auto;
+    display: flex;
+    flex-direction: column;
+
+    &-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: $text-secondary;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: $spacing-xs;
+    }
+
+    &-value {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+
+  &__status {
+    display: inline-block;
+    padding: $spacing-xs $spacing-md;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+
+    &--pending {
+      background-color: rgba($status-pending, 0.2);
+      color: color.adjust($status-pending, $lightness: -10%);
+    }
+    &--in_progress {
+      background-color: rgba($status-in-progress, 0.2);
+      color: color.adjust($status-in-progress, $lightness: -10%);
+    }
+    &--success {
+      background-color: rgba($status-success, 0.2);
+      color: color.adjust($status-success, $lightness: -10%);
+    }
+    &--cancelled {
+      background-color: rgba($status-cancelled, 0.2);
+      color: color.adjust($status-cancelled, $lightness: -10%);
+    }
+    &--failed {
+      background-color: rgba($status-error, 0.2);
+      color: color.adjust($status-error, $lightness: -10%);
+    }
+  }
+
+  &__success {
+    color: $status-success;
+    font-weight: 600;
+  }
+
+  &__error {
+    color: $error-color;
+    font-weight: 600;
+  }
+
+  &__cancelled {
+    color: $status-cancelled;
+    font-weight: 600;
+  }
+
+  &__cancel-btn {
+    @include button-danger;
+    margin-top: $spacing-md;
+    width: auto;
+    min-width: 160px;
+  }
+}
+
+.urls-section {
+  &__title {
+    font-size: 18px;
+    margin-bottom: $spacing-md;
+    @include flex-between;
+
+    &-count {
+      font-size: 14px;
+      color: $text-secondary;
+      background-color: $bg-light;
+      padding: $spacing-xs $spacing-sm;
+      border-radius: $border-radius;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+}
+
+.url-item {
+  border: 1px solid color.adjust($bg-light, $lightness: -10%);
+  border-radius: $border-radius;
+  padding: $spacing-md;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: $primary-color;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__url {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    word-break: break-all;
+    flex: 1;
+    margin-right: $spacing-md;
+  }
+
+  &__index {
+    color: $text-secondary;
+    font-weight: 600;
+    margin-right: $spacing-xs;
+    min-width: 24px;
+    display: inline-block;
+  }
+
+  &__status {
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    &--pending {
+      background-color: rgba($status-pending, 0.2);
+      color: color.adjust($status-pending, $lightness: -10%);
+    }
+    &--in_progress {
+      background-color: rgba($status-in-progress, 0.2);
+      color: color.adjust($status-in-progress, $lightness: -10%);
+    }
+    &--success {
+      background-color: rgba($status-success, 0.2);
+      color: color.adjust($status-success, $lightness: -10%);
+    }
+    &--error {
+      background-color: rgba($status-error, 0.2);
+      color: color.adjust($status-error, $lightness: -10%);
+    }
+    &--cancelled {
+      background-color: rgba($status-cancelled, 0.2);
+      color: color.adjust($status-cancelled, $lightness: -10%);
+    }
+  }
+
+  &__cancel-btn {
+    padding: $spacing-xs $spacing-sm;
+    border: 1px solid $status-cancelled;
+    border-radius: $border-radius;
+    background: transparent;
+    color: $status-cancelled;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+
+    &:hover {
+      background: rgba($status-cancelled, 0.1);
+    }
+  }
+
+  &__details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    font-size: 13px;
+    color: $text-secondary;
+
+    > * {
+      min-width: 150px;
+    }
+  }
+
+  &__error {
+    color: $error-color;
+    background-color: rgba($error-color, 0.05);
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius;
+    margin-top: $spacing-sm;
+    font-size: 12px;
+    border-left: 3px solid $error-color;
+  }
+}

@@ -1,0 +1,55 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+@mixin card {
+  background-color: $bg-white;
+  padding: $spacing-lg;
+  border-radius: $border-radius-lg;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@mixin button-base {
+  padding: $spacing-sm $spacing-md;
+  border: none;
+  border-radius: $border-radius;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+@mixin button-primary {
+  @include button-base;
+  background-color: $primary-color;
+  color: $text-light;
+
+  &:hover:not(:disabled) {
+    background-color: $primary-hover;
+  }
+}
+
+@mixin button-danger {
+  @include button-base;
+  background-color: $error-color;
+  color: $text-light;
+
+  &:hover:not(:disabled) {
+    background-color: color.adjust($error-color, $lightness: -10%);
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

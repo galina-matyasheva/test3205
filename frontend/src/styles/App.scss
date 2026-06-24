@@ -1,0 +1,75 @@
+@use 'sass:color';
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.app {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: $spacing-lg;
+
+  &__header {
+    background: linear-gradient(135deg, $bg-dark, color.adjust($bg-dark, $lightness: 10%));
+    color: $text-light;
+    padding: $spacing-lg $spacing-xl;
+    border-radius: $border-radius-lg;
+    margin-bottom: $spacing-lg;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    h1 {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  &__main {
+    display: flex;
+    gap: $spacing-lg;
+
+    @media (max-width: $mobile) {
+      flex-direction: column;
+    }
+  }
+}
+
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  width: 420px;
+  flex-shrink: 0;
+}
+
+.right-panel {
+  @include card;
+  min-height: 500px;
+  flex: 1;
+  min-width: 0;
+}
+
+.error-banner {
+  background: rgba($error-color, 0.1);
+  border: 1px solid $error-color;
+  border-radius: $border-radius;
+  padding: $spacing-sm $spacing-md;
+  color: $error-color;
+  font-size: 14px;
+  margin-bottom: $spacing-md;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-md;
+
+  button {
+    @include button-base;
+    background: $error-color;
+    color: $text-light;
+    padding: $spacing-xs $spacing-sm;
+    font-size: 12px;
+    white-space: nowrap;
+
+    &:hover {
+      background: color.adjust($error-color, $lightness: -10%);
+    }
+  }
+}
