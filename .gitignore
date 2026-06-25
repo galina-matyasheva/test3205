@@ -1,0 +1,12 @@
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+*.tsbuildinfo
+*.log
+*.local
+.vscode/
+.idea/
+coverage/
+docker-compose.override.yml
